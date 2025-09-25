@@ -11,6 +11,13 @@ public class Book {
         this.availableCopies = availableCopies;
     }
 
+    public Book(Book b) {
+        this.title = b.getTitle();
+        this.author = b.getAuthor();
+        this.isbn = b.getIsbn();
+        this.availableCopies = b.getAvailableCopies();
+    }
+
     public String getTitle() {
         return title;
     }

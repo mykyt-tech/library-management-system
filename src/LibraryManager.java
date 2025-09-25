@@ -24,4 +24,14 @@ public class LibraryManager {
 
         books.removeIf(b -> b.getIsbn().equals(isbn));
     }
+
+    public static Book searchBook(String title) {
+        for (Book b : books) {
+            if (b.getTitle().equals(title)) {
+                return new Book(b);
+            }
+        }
+
+        return null;
+    }
 }
