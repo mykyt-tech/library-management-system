@@ -34,4 +34,14 @@ public class LibraryManager {
 
         return null;
     }
+
+    public static Book searchBookByAuthor(String author) {
+        for (Book b : books) {
+            if (b.getAuthor().equals(author)) {
+                return new Book(b);
+            }
+        }
+
+        return null;
+    }
 }
