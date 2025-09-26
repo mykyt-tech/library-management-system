@@ -44,4 +44,14 @@ public class LibraryManager {
 
         return null;
     }
+
+    public static Book searchBookByIsbn(String isbn) {
+        for (Book b : books) {
+            if (b.getIsbn().equals(isbn)) {
+                return new Book(b);
+            }
+        }
+
+        return null;
+    }
 }
