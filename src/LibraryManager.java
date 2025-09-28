@@ -112,4 +112,8 @@ public class LibraryManager {
 
         return false;
     }
+
+    public static ArrayList<Book> getAllBooks() {
+        return new ArrayList<>(books);
+    }
 }
