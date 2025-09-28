@@ -54,4 +54,38 @@ public class LibraryManager {
 
         return null;
     }
+
+    public static boolean borrowBook(String isbn, int id) {
+        Book book = null;
+
+        for (Book b : books) {
+            if (b.getIsbn().equals(isbn)) {
+                if (b.getAvailableCopies() > 0) {
+                    book = b;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        if (book == null) {
+            return false;
+        }
+
+        for (Member m : members) {
+            if (m.getId() == id) {
+                for (Book mb : m.getBorrowedBooks()) {
+                    if (mb.getIsbn().equals(isbn)) {
+                        return false;
+                    }
+                }
+
+                m.addBook(book);
+                book.decreaseAvailableCopies();
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
