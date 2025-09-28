@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LibraryManager {
-    private static final ArrayList<Book> books = new ArrayList<>();
+    private static final HashMap<String, Book> books = new HashMap<>();
     private static final ArrayList<Member> members = new ArrayList<>();
 
     public static void addNewMember(int id, String name) {
@@ -9,7 +10,7 @@ public class LibraryManager {
     }
 
     public static void addNewBook(String title, String author, String isbn, int availableCopies) {
-        books.add(new Book(title, author, isbn, availableCopies));
+        books.put(isbn, new Book(title, author, isbn, availableCopies));
     }
 
     public static void removeBook(String isbn) {
@@ -22,11 +23,11 @@ public class LibraryManager {
             }
         }
 
-        books.removeIf(b -> b.getIsbn().equals(isbn));
+        books.remove(isbn);
     }
 
     public static Book searchBookByTitle(String title) {
-        for (Book b : books) {
+        for (Book b : books.values()) {
             if (b.getTitle().equals(title)) {
                 return new Book(b);
             }
@@ -36,7 +37,7 @@ public class LibraryManager {
     }
 
     public static Book searchBookByAuthor(String author) {
-        for (Book b : books) {
+        for (Book b : books.values()) {
             if (b.getAuthor().equals(author)) {
                 return new Book(b);
             }
@@ -46,7 +47,7 @@ public class LibraryManager {
     }
 
     public static Book searchBookByIsbn(String isbn) {
-        for (Book b : books) {
+        for (Book b : books.values()) {
             if (b.getIsbn().equals(isbn)) {
                 return new Book(b);
             }
@@ -56,17 +57,7 @@ public class LibraryManager {
     }
 
     public static boolean borrowBook(String isbn, int id) {
-        Book book = null;
-
-        for (Book b : books) {
-            if (b.getIsbn().equals(isbn)) {
-                if (b.getAvailableCopies() > 0) {
-                    book = b;
-                } else {
-                    return false;
-                }
-            }
-        }
+        Book book = books.get(isbn);
 
         if (book == null) {
             return false;
@@ -90,13 +81,7 @@ public class LibraryManager {
     }
 
     public static boolean returnBook(String isbn, int id) {
-        Book book = null;
-
-        for (Book b : books) {
-            if (b.getIsbn().equals(isbn)) {
-                book = b;
-            }
-        }
+        Book book = books.get(isbn);
 
         if (book == null) {
             return false;
@@ -114,6 +99,6 @@ public class LibraryManager {
     }
 
     public static ArrayList<Book> getAllBooks() {
-        return new ArrayList<>(books);
+        return new ArrayList<>(books.values());
     }
 }
