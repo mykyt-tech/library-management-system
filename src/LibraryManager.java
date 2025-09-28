@@ -88,4 +88,28 @@ public class LibraryManager {
 
         return false;
     }
+
+    public static boolean returnBook(String isbn, int id) {
+        Book book = null;
+
+        for (Book b : books) {
+            if (b.getIsbn().equals(isbn)) {
+                book = b;
+            }
+        }
+
+        if (book == null) {
+            return false;
+        }
+
+        for (Member m : members) {
+            if (m.getId() == id) {
+                m.getBorrowedBooks().removeIf(b -> b.getIsbn().equals(isbn));
+                book.increaseAvailableCopies();
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
