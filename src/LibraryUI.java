@@ -45,6 +45,7 @@ public class LibraryUI {
                     sc.nextLine();
 
                     LibraryManager.addNewBook(title, author, isbn, availableCopies);
+                    System.out.println("New book successfully added");
                     break;
                 case 2:
                     System.out.println("-----------------------------");
