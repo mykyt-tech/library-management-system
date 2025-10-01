@@ -64,7 +64,7 @@ public class LibraryManager {
     public static boolean borrowBook(String isbn, int id) {
         Book book = books.get(isbn);
 
-        if (book == null) {
+        if (book == null || book.getAvailableCopies() < 1) {
             return false;
         }
 
