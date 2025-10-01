@@ -18,17 +18,17 @@ public class LibraryManager {
         return true;
     }
 
-    public static void removeBook(String isbn) {
+    public static boolean removeBook(String isbn) {
         for (Member m : members) {
             for (Book b : m.getBorrowedBooks()) {
                 if (b.getIsbn().equals(isbn)) {
                     System.out.println("Cannot remove book: currently borrowed by member(" + m.getId() + ").");
-                    return;
+                    return false;
                 }
             }
         }
 
-        books.remove(isbn);
+        return books.remove(isbn) != null;
     }
 
     public static Book searchBookByTitle(String title) {

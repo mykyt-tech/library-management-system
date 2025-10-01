@@ -60,7 +60,15 @@ public class LibraryUI {
                     System.out.print("Enter isbn: ");
                     isbn = sc.nextLine();
 
-                    LibraryManager.removeBook(isbn);
+                    boolean removed = LibraryManager.removeBook(isbn);
+                    System.out.println("-----------------------------");
+
+                    if (removed) {
+                        System.out.println("Book successfully removed");
+                    } else {
+                        System.out.println("Something went wrong");
+                    }
+
                     break;
                 case 3:
                     int searchBy;
