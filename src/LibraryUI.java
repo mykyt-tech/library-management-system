@@ -48,9 +48,16 @@ public class LibraryUI {
                     System.out.print("Enter isbn: ");
                     isbn = sc.nextLine();
 
-                    System.out.print("Enter the number of available copies: ");
-                    availableCopies = sc.nextInt();
-                    sc.nextLine();
+                    try {
+                        System.out.print("Enter the number of available copies: ");
+                        availableCopies = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("-----------------------------");
+                        System.out.println("Field 'available copies' must be a number");
+                        continue;
+                    } finally {
+                        sc.nextLine();
+                    }
 
                     boolean added = LibraryManager.addNewBook(title, author, isbn, availableCopies);
                     System.out.println("-----------------------------");
