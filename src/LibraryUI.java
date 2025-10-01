@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LibraryUI {
@@ -17,10 +18,17 @@ public class LibraryUI {
             System.out.println("6. List all books");
             System.out.println("7. Exit");
             System.out.println("-----------------------------");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (number): ");
 
-            int option = sc.nextInt();
-            sc.nextLine();
+            int option;
+            try {
+                option = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Option must be a number");
+                continue;
+            } finally {
+                sc.nextLine();
+            }
 
             int memberId;
             String isbn;
