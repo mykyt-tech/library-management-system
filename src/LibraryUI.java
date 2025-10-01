@@ -44,8 +44,16 @@ public class LibraryUI {
                     availableCopies = sc.nextInt();
                     sc.nextLine();
 
-                    LibraryManager.addNewBook(title, author, isbn, availableCopies);
-                    System.out.println("New book successfully added");
+                    boolean added = LibraryManager.addNewBook(title, author, isbn, availableCopies);
+                    System.out.println("-----------------------------");
+
+                    if (added) {
+                        System.out.println("New book successfully added");
+                    } else {
+                        System.out.println("Something went wrong");
+                        System.out.println("(ISBN must be unique for each book)");
+                    }
+
                     break;
                 case 2:
                     System.out.println("-----------------------------");

@@ -9,8 +9,13 @@ public class LibraryManager {
         members.add(new Member(id, name));
     }
 
-    public static void addNewBook(String title, String author, String isbn, int availableCopies) {
+    public static boolean addNewBook(String title, String author, String isbn, int availableCopies) {
+        if (searchBookByIsbn(isbn) != null) {
+            return false;
+        }
+
         books.put(isbn, new Book(title, author, isbn, availableCopies));
+        return true;
     }
 
     public static void removeBook(String isbn) {
