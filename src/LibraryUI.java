@@ -169,9 +169,16 @@ public class LibraryUI {
                     System.out.print("Enter ISBN: ");
                     isbn = sc.nextLine();
 
-                    System.out.print("Enter member ID: ");
-                    memberId = sc.nextInt();
-                    sc.nextLine();
+                    try {
+                        System.out.print("Enter member ID: ");
+                        memberId = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("-----------------------------");
+                        System.out.println("ID must be a number");
+                        continue;
+                    } finally {
+                        sc.nextLine();
+                    }
 
                     boolean returned = LibraryManager.returnBook(isbn, memberId);
                     System.out.println("-----------------------------");
